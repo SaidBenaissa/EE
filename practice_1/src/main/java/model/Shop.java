@@ -9,9 +9,9 @@ import java.util.List;
  */
 @XmlRootElement
 public class Shop {
-    @XmlElement(name = "goods")
     private List<Goods> goodsList;
 
+    @XmlElement(name = "goods")
     public void setGoodsList(List<Goods> goodsList) {
         this.goodsList = goodsList;
     }

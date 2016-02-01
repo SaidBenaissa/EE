@@ -9,37 +9,37 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Goods {
-    @XmlAttribute
     private int id;
 
-    @XmlElement
     private String name;
 
-    @XmlElement
     private float price;
 
-    @XmlElement
     private Category category;
 
-    @XmlElement
     private String description;
 
+    @XmlAttribute
     public void setId(int id) {
         this.id = id;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
 
+    @XmlElement
     public void setPrice(float price) {
         this.price = price;
     }
 
+    @XmlElement
     public void setCategory(Category category) {
         this.category = category;
     }
 
+    @XmlElement
     public void setDescription(String description) {
         this.description = description;
     }

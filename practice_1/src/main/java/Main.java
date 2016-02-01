@@ -49,15 +49,15 @@ public class Main {
 
         XMLUtils utils = new XMLUtils();
 
-//        utils.marshallJaxB(shop,"testXml.xml");
-//        Shop shop1 = utils.unMarshallJaxB("testXml.xml");
-//        System.out.println(shop1);
+        utils.marshallJaxB(shop,"testXml.xml");
+//        Shop kateShop = utils.unMarshallJaxB("testXml.xml");
+//        System.out.println(kateShop);
 //
 //        utils.writeXmlWithDom(shop,"testXml1.xml");
 //        Shop shop2 = utils.parseXmlWithDom("testXml1.xml");
 //        System.out.println(shop2);
 
-        utils.parseXmlWithSax("testXml.xml");
+//        utils.parseXmlWithSax("testXml.xml");
 
     }
 

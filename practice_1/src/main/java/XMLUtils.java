@@ -5,7 +5,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -144,7 +143,8 @@ public class XMLUtils {
             pce.printStackTrace();
         }
     }
-    public Shop parseXmlWithSax(String fileName){
+
+    public Shop parseXmlWithSax(String fileName) {
 
         Shop shop = new Shop();
         Goods goods;
