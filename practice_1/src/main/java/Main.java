@@ -48,10 +48,16 @@ public class Main {
         shop.setGoodsList(goodsList);
 
         XMLUtils utils = new XMLUtils();
-//        utils.marshallJaxB(shop);
+
+//        utils.marshallJaxB(shop,"testXml.xml");
 //        Shop shop1 = utils.unMarshallJaxB("testXml.xml");
 //        System.out.println(shop1);
-        utils.parseXmlWithDom("testXml.xml");
+//
+//        utils.writeXmlWithDom(shop,"testXml1.xml");
+//        Shop shop2 = utils.parseXmlWithDom("testXml1.xml");
+//        System.out.println(shop2);
+
+        utils.parseXmlWithSax("testXml.xml");
 
     }
 

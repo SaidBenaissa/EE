@@ -16,6 +16,10 @@ public class Shop {
         this.goodsList = goodsList;
     }
 
+    public List<Goods> getGoodsList() {
+        return goodsList;
+    }
+
     @Override
     public String toString() {
         return "Shop{" +
