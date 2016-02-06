@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<shop>
+    <goods id="1">
+        <category>PC</category>
+        <description>The slowest PC ever</description>
+        <name>PC-1</name>
+        <price>199.99</price>
+    </goods>
+    <goods id="2">
+        <category>PC</category>
+        <description>Almost the slowest PC ever</description>
+        <name>PC-2</name>
+        <price>299.99</price>
+    </goods>
+    <goods id="3">
+        <category>LAPTOP</category>
+        <description>Laptop with extended graphics adepter</description>
+        <name>LAPTOP-1</name>
+        <price>388.99</price>
+    </goods>
+    <goods id="4">
+        <category>LAPTOP</category>
+        <description>Laptop with Retina display</description>
+        <name>LAPTOP-2</name>
+        <price>498.99</price>
+    </goods>
+</shop>
