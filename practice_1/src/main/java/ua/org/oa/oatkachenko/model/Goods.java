@@ -1,4 +1,4 @@
-package model;
+package ua.org.oa.oatkachenko.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -19,9 +19,17 @@ public class Goods {
 
     private String description;
 
+    public int getId() {
+        return id;
+    }
+
     @XmlAttribute
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @XmlElement
@@ -29,9 +37,17 @@ public class Goods {
         this.name = name;
     }
 
+    public float getPrice() {
+        return price;
+    }
+
     @XmlElement
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     @XmlElement
@@ -39,29 +55,13 @@ public class Goods {
         this.category = category;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @XmlElement
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     @Override

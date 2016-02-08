@@ -1,12 +1,14 @@
-import model.Category;
-import model.Goods;
-import model.Shop;
+package ua.org.oa.oatkachenko.parsers;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import ua.org.oa.oatkachenko.model.Category;
+import ua.org.oa.oatkachenko.model.Goods;
+import ua.org.oa.oatkachenko.model.Shop;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -26,9 +28,9 @@ import java.util.List;
 /**
  * Created by Oleg on 01.02.2016.
  */
-public class XMLUtils {
+public class XmlParsers {
 
-    public void marshallJaxB(Shop shop, String fileName) {
+    public static void writeWithJaxB(Shop shop, String fileName) {
         try {
             File file = new File(fileName);
             JAXBContext jaxbContext = JAXBContext.newInstance(Shop.class);
@@ -41,7 +43,7 @@ public class XMLUtils {
         }
     }
 
-    public Shop unMarshallJaxB(String fileName) {
+    public static Shop parseWithJaxB(String fileName) {
 
         Shop shop = null;
         File file = new File(fileName);
@@ -57,7 +59,7 @@ public class XMLUtils {
         return shop;
     }
 
-    public Shop parseXmlWithDom(String fileName) {
+    public static Shop parseWithDom(String fileName) {
         Shop shop = new Shop();
 
         try {
@@ -76,18 +78,12 @@ public class XMLUtils {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     Goods goods = new Goods();
-
                     goods.setId(Integer.parseInt(eElement.getAttribute("id")));
                     goods.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
                     goods.setPrice(Float.parseFloat(eElement.getElementsByTagName("price").item(0).getTextContent()));
                     String category = eElement.getElementsByTagName("category").item(0).getTextContent();
-                    switch (category) {
-                        case "PC":
-                            goods.setCategory(Category.PC);
-                        case "Laptop":
-                            goods.setCategory(Category.LAPTOP);
-                    }
-                    goods.setName(eElement.getElementsByTagName("description").item(0).getTextContent());
+                    goods.setCategory(resolveCategory(category));
+                    goods.setDescription(eElement.getElementsByTagName("description").item(0).getTextContent());
                     goodsList.add(goods);
                 }
                 shop.setGoodsList(goodsList);
@@ -98,7 +94,7 @@ public class XMLUtils {
         return shop;
     }
 
-    public void writeXmlWithDom(Shop shop, String fileName) {
+    public static void writeWithDom(Shop shop, String fileName) {
         try {
 
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -144,20 +140,31 @@ public class XMLUtils {
         }
     }
 
-    public Shop parseXmlWithSax(String fileName) {
+    public static Shop parseWithSax(String fileName) {
 
-        Shop shop = new Shop();
-        Goods goods;
         try {
             SAXParserFactory parserFactor = SAXParserFactory.newInstance();
             SAXParser parser = parserFactor.newSAXParser();
-            DefaultHandler handler = new MyHandler();
+            DefaultHandler handler = new SaxHandler();
 
             parser.parse(fileName, handler);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        return new Shop();
+        return SaxHandler.getShop();
+    }
+
+    public static Category resolveCategory(String cat) {
+        Category category = null;
+        switch (cat) {
+            case "PC":
+                category = Category.PC;
+                break;
+            case "LAPTOP":
+                category = Category.LAPTOP;
+                break;
+        }
+        return category;
     }
 }

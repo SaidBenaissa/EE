@@ -3,34 +3,36 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>ua.org.oa.oatkachenko</groupId>
+    <artifactId>practice_1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <MavenCompilerVer>3.3</MavenCompilerVer>
+        <JavaVer>1.8</JavaVer>
+        <XmlApiVer>2.0.2</XmlApiVer>
+    </properties>
 
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
-                <version>3.3</version>
+                <version>${MavenCompilerVer}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${JavaVer}</source>
+                    <target>${JavaVer}</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
-    <groupId>com.oatkachenko</groupId>
-    <artifactId>practice_1</artifactId>
-    <version>1.0-SNAPSHOT</version>
+
     <dependencies>
         <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>
-            <version>1.3.04</version>
-        </dependency>
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <version>1.3.04</version>
+            <version>${XmlApiVer}</version>
         </dependency>
     </dependencies>
 
