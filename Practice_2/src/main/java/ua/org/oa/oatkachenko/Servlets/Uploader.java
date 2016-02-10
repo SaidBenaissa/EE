@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,6 +19,7 @@ import java.util.List;
  */
 @MultipartConfig
 public class Uploader extends HttpServlet {
+    private String uploadPath;
     private boolean exception = false;
     private boolean info = false;
     private List<String> exceptionMessages;
@@ -31,20 +31,26 @@ public class Uploader extends HttpServlet {
         findUploadedImg();
         request.setAttribute("uploadedImg", uploadedImg);
         request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         exceptionMessages = new ArrayList<>();
         infoMessages = new ArrayList<>();
-        Collection<Part> parts = request.getParts();
+        Collection<Part> parts;
 
-        parts.forEach(part -> {
-            System.out.println(part.getName());
-            if (isPartAnImage(part)) {
-                saveFile(part);
+        try {
+            parts = request.getParts();
+            for (Part part : parts) {
+                if (isPartAnImage(part)) {
+                    saveFile(part);
+                }
             }
-        });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
 
         findUploadedImg();
         request.setAttribute("exception", exception);
@@ -53,8 +59,10 @@ public class Uploader extends HttpServlet {
         request.setAttribute("infoMessages", infoMessages);
         request.setAttribute("uploadedImg", uploadedImg);
 
+
         request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
     }
+
 
     private boolean isPartAnImage(Part part) {
         if (part != null && part.getName().equals("file")) {
@@ -71,7 +79,8 @@ public class Uploader extends HttpServlet {
 
     private void saveFile(Part part) {
         String path = getUploadPath();
-        String fileName = part.getSubmittedFileName();
+//        String fileName = part.getSubmittedFileName();
+        String fileName = String.valueOf(System.currentTimeMillis());
 
         checkDir(path);
 
@@ -95,9 +104,6 @@ public class Uploader extends HttpServlet {
         }
     }
 
-    private String getUploadPath() {
-        return Listener.getContextPath();
-    }
 
     private void checkDir(String path) {
         File dir = new File(path);
@@ -107,14 +113,22 @@ public class Uploader extends HttpServlet {
     }
 
     private void findUploadedImg() {
-        uploadedImg = new LinkedList<>();
+        uploadedImg = new ArrayList<>();
         File dir = new File(getUploadPath());
         File[] files = dir.listFiles();
         if (files != null) {
             for (File file : files) {
-                String imgPath = "upload" + File.separator + file.getName();
+                String imgPath = "show?id=" + file.getName();
                 uploadedImg.add(imgPath);
             }
         }
     }
+
+    private String getUploadPath() {
+        if (uploadPath == null) {
+            uploadPath = getServletContext().getInitParameter("folder");
+        }
+        return uploadPath;
+    }
+
 }

@@ -13,12 +13,12 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-11">
             <h1 class="page-header" align="center">Image uploader</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-11">
             <div class="panel panel-primary">
                 <div class="panel-body">
                     <c:if test="${requestScope.exception == true}">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-10">
+        <div class="col-lg-11">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <c:forEach var="image" items="${requestScope.uploadedImg}">
