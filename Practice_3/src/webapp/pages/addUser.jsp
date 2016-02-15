@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="..." method="...">
-	First name : <input type="text" name="...">
-	Last name : <input type="text" name="...">
-	Age : <input type="text" name="...">
-	Role : <select>...</select>
+<form action="/hello" method="POST">
+	First name : <input type="text" name="firstname">
+	Last name : <input type="text" name="lastname">
+	Age : <input type="text" name="age">
+	Role : <select>1;2</select>
 	<input type="submit" value="Add"> 
 </form>
 
