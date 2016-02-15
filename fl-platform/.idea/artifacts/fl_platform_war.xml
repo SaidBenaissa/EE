@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="fl-platform:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="fl-platform.war">
+      <element id="artifact" artifact-name="fl-platform:war exploded" />
+    </root>
+  </artifact>
+</component>
