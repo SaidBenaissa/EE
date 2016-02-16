@@ -1,0 +1,4 @@
+oracle\academy\model\Role.class
+oracle\academy\UserController.class
+oracle\academy\UserDao.class
+oracle\academy\model\User.class
