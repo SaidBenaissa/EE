@@ -15,20 +15,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class UserController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String getUserForm(ModelMap model) {
         model.addAttribute("message", "Spring in action)))");
         return "addUser";
     }
-    @RequestMapping(method = RequestMethod.POST)
+
+
+    @RequestMapping(value = "saveUser", method = RequestMethod.POST)
     public String addUser(ModelMap model,
                           @RequestParam(value = "firstname", required = true) String firstname,
                           @RequestParam(value = "lastname", required = true) String lastname,
                           @RequestParam(value = "age", required = true) int age,
                           @RequestParam(value = "role", required = true) String role
-                          ) {
+    ) {
         User user = new User();
         user.setFirstName(firstname);
+        user.setLastName(lastname);
+        user.setAge(age);
+        user.setRole(Role.valueOf(role));
+        UserDao dao = UserDaoImpl.getInstance();
+        dao.create(user);
+        model.put("users",dao.getAll());
         return "index";
     }
 }

@@ -7,7 +7,7 @@
     <title>Insert title here</title>
 </head>
 <body>
-<form action="/hello" method="POST">
+<form action="/saveUser" method="POST">
     First name : <input type="text" name="firstname">
     Last name : <input type="text" name="lastname">
     Age : <input type="numbers" name="age">
