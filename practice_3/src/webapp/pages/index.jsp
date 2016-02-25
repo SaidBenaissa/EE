@@ -34,18 +34,61 @@
                         </c:forEach>
                     </div>
                 </c:if>
-
-                <form method="POST" action="/addUser">
-                    <input type="submit" name="add"/>
+                <form class="form-select-button" method="POST" action="/addUser">
+                    <button type="submit" class="btn btn-default">Добавить</button>
                 </form>
-                <c:if test="${users != null}">
-                        <c:forEach var="user" items="${users}">
-                            <td><c:out value="${user.age}"></c:out></td>
-                        </c:forEach>
-                </c:if>
+                <form method="GET" action="/users">
+                    <button type="submit" class="btn btn-info">Info</button>
+                </form>
 
             </div>
         </div>
+    </div>
+
+
+    <div class="col-lg-11">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Список пользователей
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td><c:out value="${user.id}"></c:out></td>
+                                <td><c:out value="${user.firstName}"></c:out></td>
+                                <td><c:out value="${user.lastName}"></c:out></td>
+                                <td><c:out value="${user.age}"></c:out></td>
+                                <td><c:out value="${user.email}"></c:out></td>
+                                <td><c:out value="${user.role}"></c:out></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary">Edit</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
     </div>
 </div>
 </div>

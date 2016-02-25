@@ -1,4 +1,4 @@
-package oracle.academy;
+package oracle.academy.dao;
 
 import java.util.List;
 

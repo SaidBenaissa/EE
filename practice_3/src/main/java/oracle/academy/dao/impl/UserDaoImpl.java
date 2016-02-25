@@ -1,6 +1,8 @@
-package oracle.academy;
+package oracle.academy.dao.impl;
 
+import oracle.academy.dao.UserDao;
 import oracle.academy.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,14 +12,10 @@ import java.util.Map;
 /**
  * Created by Home on 16.02.2016.
  */
+@Repository
 public class UserDaoImpl implements UserDao {
-    private static UserDaoImpl instance = null;
     private Map<Long, User> userMap = new HashMap<>();
     private long id = 0;
-
-    private UserDaoImpl() {
-
-    }
 
     @Override
     public User create(User user) {
@@ -53,13 +51,6 @@ public class UserDaoImpl implements UserDao {
             userList.add(user);
         });
         return userList;
-    }
-
-    public static UserDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new UserDaoImpl();
-        }
-        return instance;
     }
 
 }
