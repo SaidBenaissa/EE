@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -50,14 +51,8 @@ public class UserDaoDBImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        if (nonNull(user)){
-            System.out.println(user);
-            sessionFactory.getCurrentSession().
-                    createQuery("update User set firstName=:fname,lastName=:lname,age=:age").
-                    setParameter("fname",user.getFirstName()).
-                    setParameter("lname",user.getLastName()).
-                    setParameter("age",user.getAge()).
-                    executeUpdate();
+        if (nonNull(user)) {
+            sessionFactory.getCurrentSession().saveOrUpdate(user);
         }
         return user;
     }

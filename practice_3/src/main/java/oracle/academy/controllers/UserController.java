@@ -6,11 +6,11 @@ import oracle.academy.model.User;
 import oracle.academy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by Oleg on 15.02.2016.
@@ -41,13 +41,15 @@ public class UserController {
         user.setLastName(lastname);
         user.setAge(age);
         user.setRole(Role.valueOf(role));
-        userService.create(user);
+        User user1 = userService.create(user);
+        System.out.println("user:");
+        System.out.println(user1);
         return new ModelAndView("redirect:/users");
     }
 
-    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
-    public ModelAndView getUser() {
-        System.out.println(userService.getById(1L));
+    @RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
+    public ModelAndView getUser(@PathVariable(value = "id") Long id) {
+        System.out.println(userService.getById(id));
         return new ModelAndView("redirect:/");
     }
 
@@ -76,5 +78,11 @@ public class UserController {
         user.setRole(Role.valueOf(role));
         userService.update(user);
         return new ModelAndView("redirect:/users");
+    }
+
+    @RequestMapping(value = "/getJson", method = RequestMethod.GET)
+    @ResponseBody
+    public List<User> getAllByJson(){
+        return userService.getAll();
     }
 }

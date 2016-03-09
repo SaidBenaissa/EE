@@ -8,13 +8,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="<c:url value="/resources/js/jquery.js"/>"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+
     <title>Панель управления пользователями</title>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-lg-11">
-            <h1 class="page-header" align="center">Панель управления пользователями</h1>
+            <h1 class="page-header" align="center">Панель управления пользователями.</h1>
         </div>
     </div>
     <div class="col-lg-11">
@@ -38,7 +42,7 @@
                     <button type="submit" class="btn btn-default">Добавить</button>
                 </form>
                 <form style="display: inline" method="GET" action="/users">
-                    <button type="submit" class="btn btn-info">Info</button>
+                    <button type="submit" class="btn btn-info">Список пользователей</button>
                 </form>
 
             </div>
@@ -77,7 +81,8 @@
                                 <td><c:out value="${user.role}"></c:out></td>
                                 <td>
                                     <a href="/edit/<c:out value="${user.id}"></c:out>" class="btn btn-primary">Edit</a>
-                                    <a href="/delete/<c:out value="${user.id}"></c:out>" class="btn btn-danger">Delete</a>
+                                    <a href="/delete/<c:out value="${user.id}"></c:out>"
+                                       class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -92,5 +97,19 @@
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    $.ajax({
+        url: '/getJson',         	// указываем URL и
+        dataType: "json",                 	// тип загружаемых данных
+        success: function (data) { 		// вешаем свой обработчик на функцию success
+            $.each(data, function (i, val) {	// обрабатываем полученные данные
+                console.log(val.lastName);
+            });
+        }
+
+    });
+
+
+</script>
 </body>
 </html>

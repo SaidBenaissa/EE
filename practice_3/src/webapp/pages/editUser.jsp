@@ -23,7 +23,7 @@
         <option value="ADMIN">ADMIN</option>
         <option value="SUPER_ADMIN">SUPER_ADMIN</option>
     </select>
-    <input type="submit" value="Add">
+    <input type="submit" value="Save">
 </form>
 
 </body>
