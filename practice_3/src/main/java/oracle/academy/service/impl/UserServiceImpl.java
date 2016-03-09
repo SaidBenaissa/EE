@@ -1,6 +1,6 @@
 package oracle.academy.service.impl;
 
-import oracle.academy.dao.UserDao;
+import oracle.academy.model.dao.UserDao;
 import oracle.academy.model.User;
 import oracle.academy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

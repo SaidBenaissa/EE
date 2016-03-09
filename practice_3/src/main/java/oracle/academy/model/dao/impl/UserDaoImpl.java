@@ -1,6 +1,6 @@
-package oracle.academy.dao.impl;
+package oracle.academy.model.dao.impl;
 
-import oracle.academy.dao.UserDao;
+import oracle.academy.model.dao.UserDao;
 import oracle.academy.model.User;
 
 import java.util.ArrayList;

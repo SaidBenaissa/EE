@@ -6,7 +6,7 @@ import oracle.academy.model.User;
 import oracle.academy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,14 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Oleg on 15.02.2016.
  */
 @Controller
-@RequestMapping("/")
 public class UserController {
     @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView loadMainPage() {
-        System.out.println("я тут!!!!");
         return new ModelAndView("index", "users", userService.getAll());
     }
 
@@ -33,7 +31,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "saveUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public ModelAndView addUser(@RequestParam(value = "firstname", required = true) String firstname,
                                 @RequestParam(value = "lastname", required = true) String lastname,
                                 @RequestParam(value = "age", required = true) int age,
@@ -44,6 +42,39 @@ public class UserController {
         user.setAge(age);
         user.setRole(Role.valueOf(role));
         userService.create(user);
+        return new ModelAndView("redirect:/users");
+    }
+
+    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
+    public ModelAndView getUser() {
+        System.out.println(userService.getById(1L));
+        return new ModelAndView("redirect:/");
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@PathVariable("id") Long id) {
+        userService.delete(userService.getById(id));
+        return new ModelAndView("redirect:/");
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView editUser(@PathVariable("id") Long id) {
+        return new ModelAndView("editUser", "user", userService.getById(id));
+    }
+
+    @RequestMapping(value = "/editUser", method = RequestMethod.POST)
+    public ModelAndView saveEditedUser(@RequestParam(value = "firstname", required = true) String firstname,
+                                       @RequestParam(value = "lastname", required = true) String lastname,
+                                       @RequestParam(value = "age", required = true) int age,
+                                       @RequestParam(value = "role", required = true) String role,
+                                       @RequestParam(value = "id") Long id) {
+        User user = new User();
+        user.setId(id);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        user.setAge(age);
+        user.setRole(Role.valueOf(role));
+        userService.update(user);
         return new ModelAndView("redirect:/users");
     }
 }

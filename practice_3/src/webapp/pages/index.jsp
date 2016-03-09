@@ -34,10 +34,10 @@
                         </c:forEach>
                     </div>
                 </c:if>
-                <form class="form-select-button" method="POST" action="/addUser">
+                <form style="display: inline" class="form-select-button" method="POST" action="/addUser">
                     <button type="submit" class="btn btn-default">Добавить</button>
                 </form>
-                <form method="GET" action="/users">
+                <form style="display: inline" method="GET" action="/users">
                     <button type="submit" class="btn btn-info">Info</button>
                 </form>
 
@@ -76,8 +76,8 @@
                                 <td><c:out value="${user.email}"></c:out></td>
                                 <td><c:out value="${user.role}"></c:out></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <a href="/edit/<c:out value="${user.id}"></c:out>" class="btn btn-primary">Edit</a>
+                                    <a href="/delete/<c:out value="${user.id}"></c:out>" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
