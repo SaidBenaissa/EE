@@ -5,6 +5,7 @@ import oracle.academy.model.dao.UserDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,13 @@ public class UserDaoDBImpl implements UserDao {
             sessionFactory.getCurrentSession().saveOrUpdate(user);
         }
         return user;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return (User) sessionFactory
+                .getCurrentSession()
+                .createCriteria(User.class).add(Restrictions.like("email",email+"%")).uniqueResult();
     }
 
     @Override

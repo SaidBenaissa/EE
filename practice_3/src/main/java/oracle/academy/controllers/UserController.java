@@ -68,6 +68,7 @@ public class UserController {
     public ModelAndView saveEditedUser(@RequestParam(value = "firstname", required = true) String firstname,
                                        @RequestParam(value = "lastname", required = true) String lastname,
                                        @RequestParam(value = "age", required = true) int age,
+                                       @RequestParam(value = "email", required = true) String email,
                                        @RequestParam(value = "role", required = true) String role,
                                        @RequestParam(value = "id") Long id) {
         User user = new User();
@@ -75,6 +76,7 @@ public class UserController {
         user.setFirstName(firstname);
         user.setLastName(lastname);
         user.setAge(age);
+        user.setEmail(email);
         user.setRole(Role.valueOf(role));
         userService.update(user);
         return new ModelAndView("redirect:/users");
@@ -82,7 +84,14 @@ public class UserController {
 
     @RequestMapping(value = "/getJson", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getAllByJson(){
+    public List<User> getAllByJson() {
         return userService.getAll();
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView findByEmail(@RequestParam("q") String email) {
+        User user = userService.findByEmail(email);
+        return new ModelAndView("editUser", "user", user);
     }
 }

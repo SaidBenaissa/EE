@@ -62,12 +62,12 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Age</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Возраст</th>
                             <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <th>Роль</th>
+                            <th>Действие</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -80,9 +80,9 @@
                                 <td><c:out value="${user.email}"></c:out></td>
                                 <td><c:out value="${user.role}"></c:out></td>
                                 <td>
-                                    <a href="/edit/<c:out value="${user.id}"></c:out>" class="btn btn-primary">Edit</a>
+                                    <a href="/edit/<c:out value="${user.id}"></c:out>" class="btn btn-primary">Изменить</a>
                                     <a href="/delete/<c:out value="${user.id}"></c:out>"
-                                       class="btn btn-danger">Delete</a>
+                                       class="btn btn-danger">Удалить</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -111,5 +111,16 @@
 
 
 </script>
+<form action="/search" method="get">
+    <input type="search" name="q">
+    <button type="submit">Search</button>
+</form>
+
+<div class="entry">
+    <h1>My New Post</h1>
+    <div class="body">
+        This is my first post!
+    </div>
+</div>
 </body>
 </html>

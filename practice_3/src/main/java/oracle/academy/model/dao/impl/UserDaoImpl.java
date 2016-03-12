@@ -43,6 +43,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User findByEmail(String email) {
+        //TODO
+        return null;
+    }
+
+    @Override
     public List<User> getAll() {
         List<User> userList = new ArrayList<>();
         userList.addAll(userMap.values());

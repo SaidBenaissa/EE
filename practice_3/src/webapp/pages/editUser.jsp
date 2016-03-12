@@ -17,6 +17,8 @@
                        value=<c:out value="${user.lastName}"/>>
     Age : <input type="numbers" name="age"
                  value=<c:out value="${user.age}"/>>
+    Почта : <input type="text" name="email"
+                 value=<c:out value="${user.email}"/>>
     Role :
     <select name="role">
         <option value="USER">USER</option>
