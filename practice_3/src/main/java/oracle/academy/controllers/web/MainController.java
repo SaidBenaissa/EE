@@ -1,4 +1,4 @@
-package oracle.academy.controllers;
+package oracle.academy.controllers.web;
 
 
 import oracle.academy.model.Role;
@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  * Created by Oleg on 15.02.2016.
  */
 @Controller
-public class UserController {
+public class MainController {
     @Autowired
     private UserService userService;
 
@@ -29,7 +29,6 @@ public class UserController {
     public ModelAndView getUserForm() {
         return new ModelAndView("addUser");
     }
-
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public ModelAndView addUser(@RequestParam(value = "firstname", required = true) String firstname,
